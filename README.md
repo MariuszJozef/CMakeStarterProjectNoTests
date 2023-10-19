@@ -25,7 +25,10 @@ The structure of the project is:
         └── StarterProject.cpp
 ```
 ## Some specific examples of CMake commands to configure, build, and run the program *without* CMakePresets.json
-`cd <projectDir>`
+```
+git clone --depth 1 https://github.com/MariuszJozef/CMakeStarterProjectNoTests.git
+cd CMakeStarterProjectNoTests
+```
 
 (Makefile generator and g++ compiler)
 ```
