@@ -1,9 +1,12 @@
 # A simple project (without tests) to get started with (modern) CMake and CMakePresets.json
 This is a nearly blank C++ project that is meant to serve as a starting template for cross-platform CMake builds. *More modern* CMake scripting conventions are adhered to and a useful CMakePresets.json is provided which stores various options to avoid typing them at the command prompt during the cmake configure/generate steps. 
 
+For a proper example with unit tests and mocks, please refer to the demo
+[CMakeStarterProjectWithTests](https://github.com/MariuszJozef/CMakeStarterProjectWithTests.git).
+
 ```
-git clone --depth 1 https://github.com/MariuszJozef/CMakeStarterProjectWithTests.git
-cd CMakeStarterProjectWithTests
+git clone --depth 1 https://github.com/MariuszJozef/CMakeStarterProjectNoTests.git
+cd CMakeStarterProjectNoTests
 ```
 
 The structure of the project is:
