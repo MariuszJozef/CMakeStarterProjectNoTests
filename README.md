@@ -51,8 +51,8 @@ The structure of the project is:
 - If nevertheless using PowerShell/CMD, or on Windows 10, one must first run some appropriate *.bat scripts that define VS environment variables.
 ```
     cmake -S . -B buildNMake/Msvc -G "NMake Makefiles" -D CMAKE_CXX_COMPILER=cl.exe -D CMAKE_BUILD_TYPE=MinSizeRel
-    cmake --build buildNMake/Msvc/ -j8
-    cmake --build buildNMake/Msvc/ -j8 --target run
+    cmake --build buildNMake/Msvc/
+    cmake --build buildNMake/Msvc/ --target run
 ```
 (Ninja multi-config generator and default compiler)
 ```
