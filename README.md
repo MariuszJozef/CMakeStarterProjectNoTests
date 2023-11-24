@@ -205,7 +205,7 @@ cmake --list-presets all
 ```
 For the CMakePresets.json defined in this project, a part of the output for the above command is (single-config):
 ```
-Make[-Clang-Debug
+Make-Clang-Debug
 NMake-Msvc-Release
 Ninja-Gnu-MinSizeRel
 etc.
@@ -215,7 +215,7 @@ etc.
 NinjaMC-Gnu
 VSx64-Msvc
 Xcode-Clang
-etc.]
+etc.
 ```
 ## *With* CMakePresets.json: Single-config generators
 ```
