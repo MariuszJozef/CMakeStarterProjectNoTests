@@ -1,4 +1,4 @@
-name: Build and run **with** CMakePreset.json 2
+name: Build and run with CMakePreset.json 2
 
 on:
   push: 
