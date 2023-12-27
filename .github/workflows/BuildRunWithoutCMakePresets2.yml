@@ -28,6 +28,30 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - run: echo "🐧 This job is now running on a ${{ runner.os }}"
-      - run: echo The repository is ${{ github.repository }}.
-      - run: echo os = ${{ matrix.os }}, cpp_compiler = ${{ matrix.cpp_compiler}}, build_type = ${{ matrix.build_type }}
+    - run: echo Running on ${{ runner.os }}"
+    - run: echo Platform = ${{ matrix.os }}, compiler = ${{ matrix.cpp_compiler}}, build type = ${{ matrix.build_type }}
+
+    - name: Setup MSVC compiler
+      if: ${{ matrix.os == 'windows-latest' }}
+      # uses: microsoft/setup-msbuild@v1.0.2
+      uses: ilammy/msvc-dev-cmd@v1
+        
+    - name: Setup Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Location of repo
+      run: |
+        pwd 
+        ls ${{ github.workspace }}
+
+    - name: Tool versions
+      shell: bash
+      run: | 
+        echo cmake --version
+        cmake --version
+        echo 
+        echo ninja --version
+        ninja --version
