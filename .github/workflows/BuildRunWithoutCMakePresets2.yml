@@ -28,7 +28,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - run: echo Running on ${{ runner.os }}"
+    - run: echo Running on ${{ runner.os }}
     - run: echo Platform = ${{ matrix.os }}, compiler = ${{ matrix.cpp_compiler}}, build type = ${{ matrix.build_type }}
 
     - name: Setup MSVC compiler
