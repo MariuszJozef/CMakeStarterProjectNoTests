@@ -28,20 +28,34 @@ jobs:
           - os: ubuntu-latest
             preset: 
               - Ninja-Msvc-Debug
+          - os: ubuntu-latest
+            preset: 
               - Ninja-Msvc-Release
             # - NinjaMC-Msvc
           - os: macos-latest
             preset: 
               - Ninja-Gnu-Debug
+          - os: macos-latest
+            preset: 
               - Ninja-Gnu-Release
+          - os: macos-latest
+            preset: 
               - Ninja-Msvc-Debug
+          - os: macos-latest
+            preset: 
               - Ninja-Msvc-Release
             # - NinjaMC-Msvc
           - os: windows-latest
             preset: 
               - Ninja-Gnu-Debug
+          - os: windows-latest
+            preset: 
               - Ninja-Gnu-Release
+          - os: windows-latest
+            preset: 
               - Ninja-Clang-Debug
+          - os: windows-latest
+            preset: 
               - Ninja-Clang-Release
             # - NinjaMC-Gnu
             # - NinjaMC-Clang
@@ -49,7 +63,7 @@ jobs:
     runs-on: ${{matrix.os}}
 
     steps:
-    - run: echo Platform = ${{matrix.os}}, preset = ${{matrix.cpp_preset}}
+    - run: echo Platform = ${{matrix.os}}, preset = ${{matrix.preset}}
 
     - name: Checkout repo
       uses: actions/checkout@v4
@@ -92,19 +106,19 @@ jobs:
     - name: >
         CMake configure ~ 
         platform = ${{runner.os}} ~ 
-        preset = ${{matrix.cpp_preset}}
+        preset = ${{matrix.preset}}
       run: cmake --preset ${{matrix.preset}}
       
     - name: >
         CMake build ~ 
         platform = ${{runner.os}} ~ 
-        preset = ${{matrix.cpp_preset}}
+        preset = ${{matrix.preset}}
       run: cmake --build --preset ${{matrix.preset}}
 
     - name: >
         CMake run ~ 
         platform = ${{runner.os}} ~ 
-        preset = ${{matrix.cpp_preset}}
+        preset = ${{matrix.preset}}
       run: cmake --build --preset ${{matrix.preset}} --target run
 
     - name: Build dir
