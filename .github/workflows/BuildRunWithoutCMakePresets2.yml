@@ -28,16 +28,22 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    # - run: echo Running on ${{ runner.os }}
     - run: echo Platform = ${{ matrix.os }}, compiler = ${{ matrix.cpp_compiler}}, build type = ${{ matrix.build_type }}
+        
+    - name: Setup Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
 
     - name: Setup MSVC compiler
       if: ${{ matrix.os == 'windows-latest' }}
       # uses: microsoft/setup-msbuild@v1.0.2
       uses: ilammy/msvc-dev-cmd@v1
-        
-    - name: Setup Ninja
-      uses: seanmiddleditch/gha-setup-ninja@master
+
+    - name: MSVC compiler version
+      if: ${{ matrix.os == 'windows-latest' }}
+      shell: bash
+      run: |
+        echo cl
+        cl
 
     - name: Tool versions
       shell: bash
@@ -54,13 +60,6 @@ jobs:
         echo ninja --version
         ninja --version
 
-    - name: Tool versions (Windows)
-      if: ${{ matrix.os == 'windows-latest' }}
-      shell: bash
-      run: |
-        echo cl
-        cl
-
     - name: Checkout repo
       uses: actions/checkout@v4
 
@@ -68,3 +67,12 @@ jobs:
       run: |
         pwd 
         ls ${{ github.workspace }}
+
+    - name: CMake configure ${{ runner.os }} ${{matrix.build_type}} ${{matrix.cpp_compiler}}
+      run: cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D CMAKE_CXX_COMPILER=${{matrix.cpp_compiler}} 
+      
+    - name: CMake build ${{ runner.os }}
+      run: cmake --buildNinja -j8
+
+    - name: CMake run ${{ runner.os }}
+      run: cmake --buildNinja -j8 --target run
