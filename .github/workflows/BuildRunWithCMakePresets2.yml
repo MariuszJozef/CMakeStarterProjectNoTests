@@ -1,0 +1,109 @@
+name: Build and run **with** CMakePresets.json 2
+
+on:
+  push: 
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        presets: 
+        # single config generators
+          - Ninja-Msvc-Debug
+          - Ninja-Msvc-Release
+          - Ninja-Gnu-Debug
+          - Ninja-Gnu-Release
+          - Ninja-Clang-Debug
+          - Ninja-Clang-Release
+        # multi config generators
+          # - NinjaMC-Msvc
+          # - NinjaMC-Gnu
+          # - NinjaMC-Clang
+        exclude:
+          - os: ubuntu-latest
+            presets: 
+            - Ninja-Msvc-Debug
+            - Ninja-Msvc-Release
+            # - NinjaMC-Msvc
+          - os: macos-latest
+            presets: 
+            - Ninja-Msvc-Debug
+            - Ninja-Msvc-Release
+            # - NinjaMC-Msvc
+          - os: windows-latest
+            presets: 
+            - Ninja-Gnu-Debug
+            - Ninja-Gnu-Release
+            - Ninja-Clang-Debug
+            - Ninja-Clang-Release
+            # - NinjaMC-Gnu
+            # - NinjaMC-Clang
+        
+    runs-on: ${{matrix.os}}
+
+    steps:
+    - run: echo Platform = ${{matrix.os}}, presets = ${{matrix.cpp_presets}}
+
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Location of repo
+      run: |
+        pwd 
+        ls ${{github.workspace}}
+        
+    - name: Setup Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
+    - name: Setup MSVC compiler
+      if: ${{matrix.os == 'windows-latest'}}
+      # uses: microsoft/setup-msbuild@v1.0.2
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: MSVC compiler version
+      if: ${{matrix.os == 'windows-latest'}}
+      shell: bash
+      run: |
+        echo cl
+        cl
+
+    - name: Tool versions
+      shell: bash
+      run: | 
+        echo g++ --version
+        g++ --version
+        echo 
+        echo clang++ --version
+        clang++ --version
+        echo 
+        echo cmake --version
+        cmake --version
+        echo 
+        echo ninja --version
+        ninja --version
+
+    - name: >
+        CMake configure ~ 
+        platform = ${{runner.os}} ~ 
+        presets = ${{matrix.cpp_presets}}
+      run: cmake --presets ${{matrix.presets}}
+      
+    - name: >
+        CMake build ~ 
+        platform = ${{runner.os}} ~ 
+        presets = ${{matrix.cpp_presets}}
+      run: cmake --build --presets ${{matrix.presets}}
+
+    - name: >
+        CMake run ~ 
+        platform = ${{runner.os}} ~ 
+        presets = ${{matrix.cpp_presets}}
+      run: cmake --build --presets ${{matrix.presets}} --target run
+
+    - name: Build dir
+      run: ls ${{github.workspace}}/build*
