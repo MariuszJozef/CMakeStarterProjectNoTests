@@ -43,6 +43,7 @@ jobs:
         ls ${{ github.workspace }}
 
     - name: Tool versions
+      if: ${{ matrix.os == 'windows-latest' }}
       shell: bash
       run: | 
         echo cmake --version
