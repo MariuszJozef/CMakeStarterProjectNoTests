@@ -29,6 +29,14 @@ jobs:
 
     steps:
     - run: echo Platform = ${{ matrix.os }}, compiler = ${{ matrix.cpp_compiler}}, build type = ${{ matrix.build_type }}
+
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Location of repo
+      run: |
+        pwd 
+        ls ${{ github.workspace }}
         
     - name: Setup Ninja
       uses: seanmiddleditch/gha-setup-ninja@master
@@ -60,16 +68,8 @@ jobs:
         echo ninja --version
         ninja --version
 
-    - name: Checkout repo
-      uses: actions/checkout@v4
-
-    - name: Location of repo
-      run: |
-        pwd 
-        ls ${{ github.workspace }}
-
     - name: CMake configure ${{ runner.os }} ${{matrix.build_type}} ${{matrix.cpp_compiler}}
-      run: cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=${{matrix.build_type}}
+      run: cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=${{matrix.build_type}} --fresh
       
     - name: CMake build ${{ runner.os }}
       run: cmake --build buildNinja -j8
