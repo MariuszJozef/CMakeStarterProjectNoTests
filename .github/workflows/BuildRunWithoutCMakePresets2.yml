@@ -48,6 +48,9 @@ jobs:
         echo clang++ --version
         clang++ --version
         echo 
+        echo cl
+        cl
+        echo 
         echo cmake --version
         cmake --version
         echo 
@@ -58,8 +61,8 @@ jobs:
       if: ${{ matrix.os == 'windows-latest' }}
       shell: bash
       run: |
-        echo cl --version
-        cl --version
+        echo cl
+        cl
 
     - name: Checkout repo
       uses: actions/checkout@v4
