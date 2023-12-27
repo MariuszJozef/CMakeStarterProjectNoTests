@@ -155,14 +155,17 @@ jobs:
       uses: seanmiddleditch/gha-setup-ninja@master
 
     - name: Tool versions
-      run: | 
-        echo cl --version
-        cl --version
-        echo 
-        echo cmake --version
+      shell: powershell
+      run: |
+        Write-Host cl
+        cl
+
+        Write-Host 
+        Write-Host cmake --version
         cmake --version
-        echo 
-        echo ninja --version
+
+        Write-Host 
+        Write-Host ninja --version
         ninja --version
 
     - name: CMake configure, build, run on (Windows, Ninja, Msvc, Debug)
