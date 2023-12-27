@@ -1,4 +1,4 @@
-name: Build and run with CMakePreset.json 2
+name: Build and run with CMakePresets.json 2
 
 on:
   push: 
@@ -6,11 +6,8 @@ on:
   pull_request:
     branches: [master]
 
-env:
-  isSingleConfigGenerator: "yes"
-
 jobs:
-  build1:
+  buildSingleConfig:
     strategy:
       fail-fast: false
       matrix:
@@ -23,11 +20,22 @@ jobs:
           - Ninja-Gnu-Release
           - Ninja-Clang-Debug
           - Ninja-Clang-Release
+          - NMake-Msvc-Debug
+          - NMake-Msvc-Release
+          - Make-Gnu-Debug
+          - Make-Gnu-Release
+          - Make-Clang-Debug
+          - Make-Clang-Release
         exclude:
           - os: ubuntu-latest
             preset: Ninja-Msvc-Debug
           - os: ubuntu-latest
             preset: Ninja-Msvc-Release
+          - os: ubuntu-latest
+            preset: NMake-Msvc-Debug
+          - os: ubuntu-latest
+            preset: NMake-Msvc-Release
+
           - os: macos-latest
             preset: Ninja-Gnu-Debug
           - os: macos-latest
@@ -36,6 +44,15 @@ jobs:
             preset: Ninja-Msvc-Debug
           - os: macos-latest
             preset: Ninja-Msvc-Release
+          - os: macos-latest
+            preset: NMake-Msvc-Debug
+          - os: macos-latest
+            preset: NMake-Msvc-Release
+          - os: macos-latest
+            preset: NMake-Gnu-Debug
+          - os: macos-latest
+            preset: NMake-Gnu-Release
+
           - os: windows-latest
             preset: Ninja-Gnu-Debug
           - os: windows-latest
@@ -44,6 +61,14 @@ jobs:
             preset: Ninja-Clang-Debug
           - os: windows-latest
             preset: Ninja-Clang-Release
+          - os: windows-latest
+            preset: Make-Gnu-Debug
+          - os: windows-latest
+            preset: Make-Gnu-Release
+          - os: windows-latest
+            preset: Make-Clang-Debug
+          - os: windows-latest
+            preset: Make-Clang-Release
         
     runs-on: ${{matrix.os}}
 
@@ -109,7 +134,7 @@ jobs:
     - name: Build dir
       run: ls ${{github.workspace}}/build*
   
-  build2:
+  buildMultiConfig:
     strategy:
       fail-fast: false
       matrix:
@@ -119,18 +144,33 @@ jobs:
           - NinjaMC-Msvc
           - NinjaMC-Gnu
           - NinjaMC-Clang
+          - NMake-Msvc
+          - Make-Gnu
+          - Make-Clang
         build_type: [Debug, Release]
         exclude:
           - os: ubuntu-latest
             preset: NinjaMC-Msvc
+          - os: ubuntu-latest
+            preset: NMake-Msvc
+            
           - os: macos-latest
             preset: NinjaMC-Gnu
           - os: macos-latest
             preset: NinjaMC-Msvc
+          - os: macos-latest
+            preset: NMake-Msvc
+          - os: macos-latest
+            preset: Make-Gnu
+
           - os: windows-latest
             preset: NinjaMC-Gnu
           - os: windows-latest
             preset: NinjaMC-Clang
+          - os: windows-latest
+            preset: Make-Gnu
+          - os: windows-latest
+            preset: Make-Clang
         
     runs-on: ${{matrix.os}}
 
