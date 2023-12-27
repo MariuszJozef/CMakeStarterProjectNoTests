@@ -69,7 +69,7 @@ jobs:
         ls ${{ github.workspace }}
 
     - name: CMake configure ${{ runner.os }} ${{matrix.build_type}} ${{matrix.cpp_compiler}}
-      run: cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D CMAKE_CXX_COMPILER=${{matrix.cpp_compiler}} 
+      run: cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=${{matrix.build_type}}
       
     - name: CMake build ${{ runner.os }}
       run: cmake --buildNinja -j8
