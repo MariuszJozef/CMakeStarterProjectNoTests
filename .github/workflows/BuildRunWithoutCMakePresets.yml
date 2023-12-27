@@ -36,65 +36,65 @@ jobs:
         echo ninja --version
         ninja --version
 
-    - name: CMake configure, build, run on (Linux, Make, Gnu, Debug)
+    - name: CMake configure, build, run --- Linux, Make, Gnu, Debug
       run: |
-        cmake -S . -B buildMake/Gnu -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=g++
-        cmake --build buildMake/Gnu -j8
-        cmake --build buildMake/Gnu -j8 --target run
+        cmake -S . -B buildMake_/Gnu -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=g++
+        cmake --build buildMake_/Gnu -j8
+        cmake --build buildMake_/Gnu -j8 --target run
 
-    - name: CMake configure, build, run on (Linux, Make, Gnu, Release)
+    - name: CMake configure, build, run --- Linux, Make, Gnu, Release
       run: |
-        cmake -S . -B buildMake/Gnu -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=g++
-        cmake --build buildMake/Gnu -j8
-        cmake --build buildMake/Gnu -j8 --target run
+        cmake -S . -B buildMake_/Gnu -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=g++
+        cmake --build buildMake_/Gnu -j8
+        cmake --build buildMake_/Gnu -j8 --target run
 
-    - name: CMake configure, build, run on (Linux, Make, Clang, Debug)
+    - name: CMake configure, build, run --- Linux, Make, Clang, Debug
       run: |
-        cmake -S . -B buildMake/Clang -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=clang++
-        cmake --build buildMake/Clang -j8
-        cmake --build buildMake/Clang -j8 --target run
+        cmake -S . -B buildMake_/Clang -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=clang++
+        cmake --build buildMake_/Clang -j8
+        cmake --build buildMake_/Clang -j8 --target run
 
-    - name: CMake configure, build, run on (Linux, Make, Clang, Release)
+    - name: CMake configure, build, run --- Linux, Make, Clang, Release
       run: |
-        cmake -S . -B buildMake/Clang -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=clang++
-        cmake --build buildMake/Clang -j8
-        cmake --build buildMake/Clang -j8 --target run
+        cmake -S . -B buildMake_/Clang -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=clang++
+        cmake --build buildMake_/Clang -j8
+        cmake --build buildMake_/Clang -j8 --target run
 
-    - name: CMake configure, build, run on (Linux, Ninja, Gnu, Debug)
+    - name: CMake configure, build, run --- Linux, Ninja, Gnu, Debug
       run: |
-        cmake -S . -B buildNinja/Gnu -G Ninja -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=g++
-        cmake --build buildNinja/Gnu -j8
-        cmake --build buildNinja/Gnu -j8 --target run
+        cmake -S . -B buildNinja_/Gnu -G Ninja -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=g++
+        cmake --build buildNinja_/Gnu -j8
+        cmake --build buildNinja_/Gnu -j8 --target run
 
-    - name: CMake configure, build, run on (Linux, Ninja, Gnu, Release)
+    - name: CMake configure, build, run --- Linux, Ninja, Gnu, Release
       run: |
-        cmake -S . -B buildNinja/Gnu -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=g++
-        cmake --build buildNinja/Gnu -j8
-        cmake --build buildNinja/Gnu -j8 --target run
+        cmake -S . -B buildNinja_/Gnu -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=g++
+        cmake --build buildNinja_/Gnu -j8
+        cmake --build buildNinja_/Gnu -j8 --target run
         
-    - name: CMake configure, build, run on (Linux, Ninja, Clang, Debug)
+    - name: CMake configure, build, run --- Linux, Ninja, Clang, Debug
       run: |
-        cmake -S . -B buildNinja/Clang -G Ninja -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=clang++
-        cmake --build buildNinja/Clang -j8
-        cmake --build buildNinja/Clang -j8 --target run
+        cmake -S . -B buildNinja_/Clang -G Ninja -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=clang++
+        cmake --build buildNinja_/Clang -j8
+        cmake --build buildNinja_/Clang -j8 --target run
 
-    - name: CMake configure, build, run on (Linux, Ninja, Clang, Release)
+    - name: CMake configure, build, run --- Linux, Ninja, Clang, Release
       run: |
-        cmake -S . -B buildNinja/Clang -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=clang++
-        cmake --build buildNinja/Clang -j8
-        cmake --build buildNinja/Clang -j8 --target run
+        cmake -S . -B buildNinja_/Clang -G Ninja -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=clang++
+        cmake --build buildNinja_/Clang -j8
+        cmake --build buildNinja_/Clang -j8 --target run
 
-    - name: CMake configure, build, run on (Linux, Ninja Multi-Config, Gnu, Debug & Release)
+    - name: CMake configure, build, run --- Linux, Ninja Multi-Config, Gnu, Debug & Release
       run: |
-        cmake -S . -B buildNinjaMC/Gnu -G "Ninja Multi-Config" -D CMAKE_CXX_COMPILER=g++
-        cmake --build buildNinjaMC/Gnu -j8 --config Debug --target run
-        cmake --build buildNinjaMC/Gnu -j8 --config Release --target run
+        cmake -S . -B buildNinjaMC_/Gnu -G "Ninja Multi-Config" -D CMAKE_CXX_COMPILER=g++
+        cmake --build buildNinjaMC_/Gnu -j8 --config Debug --target run
+        cmake --build buildNinjaMC_/Gnu -j8 --config Release --target run
 
-    - name: CMake configure, build, run on (Linux, Ninja Multi-Config, Clang, Debug & Release)
+    - name: CMake configure, build, run --- Linux, Ninja Multi-Config, Clang, Debug & Release
       run: |
-        cmake -S . -B buildNinjaMC/Clang -G "Ninja Multi-Config" -D CMAKE_CXX_COMPILER=clang++
-        cmake --build buildNinjaMC/Clang -j8 --config Debug --target run
-        cmake --build buildNinjaMC/Clang -j8 --config Release --target run
+        cmake -S . -B buildNinjaMC_/Clang -G "Ninja Multi-Config" -D CMAKE_CXX_COMPILER=clang++
+        cmake --build buildNinjaMC_/Clang -j8 --config Debug --target run
+        cmake --build buildNinjaMC_/Clang -j8 --config Release --target run
 
 
   build-on-macos:
@@ -122,35 +122,41 @@ jobs:
         echo ninja --version
         ninja --version
 
-    - name: CMake configure, build, run on (MacOS, Make, Clang, Debug)
+    - name: CMake configure, build, run --- MacOS, Make, Clang, Debug
       run: |
-        cmake -S . -B buildMake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug
-        cmake --build buildMake -j8
-        cmake --build buildMake -j8 --target run
+        cmake -S . -B buildMake_ -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug
+        cmake --build buildMake_ -j8
+        cmake --build buildMake_ -j8 --target run
 
-    - name: CMake configure, build, run on (MacOS, Make, Clang, Release)
+    - name: CMake configure, build, run --- MacOS, Make, Clang, Release
       run: |
-        cmake -S . -B buildMake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release
-        cmake --build buildMake -j8
-        cmake --build buildMake -j8 --target run
+        cmake -S . -B buildMake_ -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release
+        cmake --build buildMake_ -j8
+        cmake --build buildMake_ -j8 --target run
 
-    - name: CMake configure, build, run on (MacOS, Ninja, Msvc, Debug)
+    - name: CMake configure, build, run --- MacOS, Ninja, Msvc, Debug
       run: |
-        cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=Debug
-        cmake --build buildNinja -j8
-        cmake --build buildNinja -j8 --target run
+        cmake -S . -B buildNinja_ -G Ninja -D CMAKE_BUILD_TYPE=Debug
+        cmake --build buildNinja_ -j8
+        cmake --build buildNinja_ -j8 --target run
 
-    - name: CMake configure, build, run on (MacOS, Ninja, Clang, Release)
+    - name: CMake configure, build, run --- MacOS, Ninja, Clang, Release
       run: |
-        cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=Release
-        cmake --build buildNinja -j8
-        cmake --build buildNinja -j8 --target run
+        cmake -S . -B buildNinja_ -G Ninja -D CMAKE_BUILD_TYPE=Release
+        cmake --build buildNinja_ -j8
+        cmake --build buildNinja_ -j8 --target run
 
-    - name: CMake configure, build, run on (MacOS, Ninja Multi-Config, Clang, Debug & Release)
+    - name: CMake configure, build, run --- MacOS, Ninja Multi-Config, Clang, Debug & Release
       run: |
-        cmake -S . -B buildNinjaMC -G "Ninja Multi-Config"
-        cmake --build buildNinjaMC -j8 --config Debug --target run
-        cmake --build buildNinjaMC -j8 --config Release --target run
+        cmake -S . -B buildNinjaMC_ -G "Ninja Multi-Config"
+        cmake --build buildNinjaMC_ -j8 --config Debug --target run
+        cmake --build buildNinjaMC_ -j8 --config Release --target run
+
+    - name: CMake configure, build, run --- MacOS, Xcode, Clang, Debug & Release
+      run: |
+        cmake -S . -B buildXcode_ -G Xcode
+        cmake --build buildXcode_ -j8 --config Debug --target run
+        cmake --build buildXcode_ -j8 --config Release --target run
 
 
   build-on-windows:
@@ -185,33 +191,44 @@ jobs:
         Write-Host ninja --version
         ninja --version
 
-    - name: CMake configure, build, run on (Windows, NMake, Msvc, Debug)
+    - name: CMake configure, build, run --- Windows, NMake, Msvc, Debug
       run: |
-        cmake -S . -B buildNMake -G "NMake Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=cl.exe
-        cmake --build buildNMake
-        cmake --build buildNMake --target run
+        cmake -S . -B buildNMake_ -G "NMake Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=cl.exe
+        cmake --build buildNMake_
+        cmake --build buildNMake_ --target run
 
-    - name: CMake configure, build, run on (Windows, NMake, Msvc, Release)
+    - name: CMake configure, build, run --- Windows, NMake, Msvc, Release
       run: |
-        cmake -S . -B buildNMake -G "NMake Makefiles" -D CMAKE_BUILD_TYPE=Release
-        cmake --build buildNMake
-        cmake --build buildNMake --target run
+        cmake -S . -B buildNMake_ -G "NMake Makefiles" -D CMAKE_BUILD_TYPE=Release
+        cmake --build buildNMake_
+        cmake --build buildNMake_ --target run
 
-    - name: CMake configure, build, run on (Windows, Ninja, Msvc, Debug)
+    - name: CMake configure, build, run --- Windows, Ninja, Msvc, Debug
       run: |
-        cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=Debug
-        cmake --build buildNinja -j8
-        cmake --build buildNinja -j8 --target run
+        cmake -S . -B buildNinja_ -G Ninja -D CMAKE_BUILD_TYPE=Debug
+        cmake --build buildNinja_ -j8
+        cmake --build buildNinja_ -j8 --target run
 
-    - name: CMake configure, build, run on (Windows, Ninja, Msvc, Release)
+    - name: CMake configure, build, run --- Windows, Ninja, Msvc, Release
       run: |
-        cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=Release
-        cmake --build buildNinja -j8
-        cmake --build buildNinja -j8 --target run
+        cmake -S . -B buildNinja_ -G Ninja -D CMAKE_BUILD_TYPE=Release
+        cmake --build buildNinja_ -j8
+        cmake --build buildNinja_ -j8 --target run
 
-    - name: CMake configure, build, run on (Windows, Ninja Multi-Config, Msvc, Debug & Release)
+    - name: CMake configure, build, run --- Windows, Ninja Multi-Config, Msvc, Debug & Release
       run: |
-        cmake -S . -B buildNinjaMC -G "Ninja Multi-Config"
-        cmake --build buildNinjaMC -j8 --config Debug --target run
-        cmake --build buildNinjaMC -j8 --config Release --target run
+        cmake -S . -B buildNinjaMC_ -G "Ninja Multi-Config"
+        cmake --build buildNinjaMC_ -j8 --config Debug --target run
+        cmake --build buildNinjaMC_ -j8 --config Release --target run
 
+    - name: CMake configure, build, run --- Windows, Visual Studio x32, Msvc, Debug & Release
+      run: |
+        cmake -S . -B buildVS_/x32 -G "Visual Studio 17 2022" -A x32
+        cmake --build buildVS_/x32 -j8 --config Debug --target run
+        cmake --build buildVS_/x32 -j8 --config Release --target run
+
+    - name: CMake configure, build, run --- Windows, Visual Studio x64, Msvc, Debug & Release
+      run: |
+        cmake -S . -B buildVS_/x64 -G "Visual Studio 17 2022" -A x64
+        cmake --build buildVS_/x64 -j8 --config Debug --target run
+        cmake --build buildVS_/x64 -j8 --config Release --target run
