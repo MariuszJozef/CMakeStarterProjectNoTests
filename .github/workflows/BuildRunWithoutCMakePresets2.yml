@@ -34,21 +34,27 @@ jobs:
     - name: Setup Ninja
       uses: seanmiddleditch/gha-setup-ninja@master
 
-    - name: Checkout repo
-      uses: actions/checkout@v4
-
-    - name: Location of repo
-      run: |
-        pwd 
-        ls ${{ github.workspace }}
-
     - name: Tool versions
       run: | 
+        echo g++ --version
+        g++ --version
+        echo 
+        echo clang++ --version
+        clang++ --version
+        echo 
         echo cmake --version
         cmake --version
         echo 
         echo ninja --version
         ninja --version
+
+    # - name: Checkout repo
+    #   uses: actions/checkout@v4
+
+    # - name: Location of repo
+    #   run: |
+    #     pwd 
+    #     ls ${{ github.workspace }}
 
     - name: Setup MSVC compiler
       if: ${{ matrix.os == 'windows-latest' }}
