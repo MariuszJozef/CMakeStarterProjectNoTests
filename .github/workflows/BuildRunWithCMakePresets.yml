@@ -1,4 +1,4 @@
-name: Build and run without CMakePresets.json
+name: Build and run with CMakePresets.json
 
 on:
   push: 

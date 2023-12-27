@@ -7,7 +7,7 @@ on:
     branches: [master]
 
 jobs:
-  buildSingleConfig:
+  singleConfig:
     strategy:
       fail-fast: false
       matrix:
@@ -135,7 +135,7 @@ jobs:
     - name: Build dir
       run: ls ${{github.workspace}}/build*
   
-  buildMultiConfig:
+  multiConfig:
     strategy:
       fail-fast: false
       matrix:
@@ -149,7 +149,7 @@ jobs:
           - VSx64-Msvc
           - Xcode-Clang
         build_type: [Debug, Release]
-        
+
         exclude:
           - os: ubuntu-latest
             preset: NinjaMC-Msvc
