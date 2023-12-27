@@ -35,6 +35,7 @@ jobs:
       uses: seanmiddleditch/gha-setup-ninja@master
 
     - name: Tool versions
+      shell: bash
       run: | 
         echo g++ --version
         g++ --version
