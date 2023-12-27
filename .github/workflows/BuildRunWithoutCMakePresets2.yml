@@ -8,8 +8,6 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-
     strategy:
       fail-fast: false
       matrix:
@@ -19,14 +17,16 @@ jobs:
         exlude:
           - os: macos-latest
             cpp_compiler: g++
-        include:
-          - os: windows-latest
-            cpp_compiler: cl
-            build_type: Debug
-          - os: windows-latest
-            cpp_compiler: cl
-            build_type: Release
+        # include:
+        #   - os: windows-latest
+        #     cpp_compiler: cl
+        #     build_type: Debug
+        #   - os: windows-latest
+        #     cpp_compiler: cl
+        #     build_type: Release
         
+    runs-on: ${{ matrix.os }}
+
     steps:
       - run: echo "🐧 This job is now running on a ${{ runner.os }}"
       - run: echo "The repository is ${{ github.repository }}."
