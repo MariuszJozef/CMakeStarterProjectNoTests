@@ -27,20 +27,22 @@ jobs:
         exclude:
           - os: ubuntu-latest
             preset: 
-            - Ninja-Msvc-Debug
-            - Ninja-Msvc-Release
+              - Ninja-Msvc-Debug
+              - Ninja-Msvc-Release
             # - NinjaMC-Msvc
           - os: macos-latest
             preset: 
-            - Ninja-Msvc-Debug
-            - Ninja-Msvc-Release
+              - Ninja-Gnu-Debug
+              - Ninja-Gnu-Release
+              - Ninja-Msvc-Debug
+              - Ninja-Msvc-Release
             # - NinjaMC-Msvc
           - os: windows-latest
             preset: 
-            - Ninja-Gnu-Debug
-            - Ninja-Gnu-Release
-            - Ninja-Clang-Debug
-            - Ninja-Clang-Release
+              - Ninja-Gnu-Debug
+              - Ninja-Gnu-Release
+              - Ninja-Clang-Debug
+              - Ninja-Clang-Release
             # - NinjaMC-Gnu
             # - NinjaMC-Clang
         
