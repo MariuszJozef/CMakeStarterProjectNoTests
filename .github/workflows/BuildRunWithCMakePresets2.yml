@@ -26,6 +26,7 @@ jobs:
           - Make-Gnu-Release
           - Make-Clang-Debug
           - Make-Clang-Release
+
         exclude:
           - os: ubuntu-latest
             preset: Ninja-Msvc-Debug
@@ -148,6 +149,7 @@ jobs:
           - VSx64-Msvc
           - Xcode-Clang
         build_type: [Debug, Release]
+        
         exclude:
           - os: ubuntu-latest
             preset: NinjaMC-Msvc
