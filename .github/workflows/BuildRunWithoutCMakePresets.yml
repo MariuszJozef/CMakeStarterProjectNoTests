@@ -1,0 +1,141 @@
+name: Build and run without CMakePresets.json
+
+on:
+  push: 
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+
+  build-on-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Location of repo
+      run: |
+        pwd 
+        ls ${{ github.workspace }}
+        
+    - name: Setup Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
+    - name: Tool versions
+      run: | 
+        echo g++ --version
+        g++ --version
+        echo 
+        echo clang++ --version
+        clang++ --version
+        echo 
+        echo cmake --version
+        cmake --version
+        echo 
+        echo ninja --version
+        ninja --version
+
+    - name: CMake configure, build, run on (MacOS, Make, Gnu, Debug)
+      run: |
+        cmake -S . -B buildMake/Gnu -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=g++
+        cmake --build buildMake/Gnu -j8
+        cmake --build buildMake/Gnu -j8 --target run
+
+    - name: CMake configure, build, run on (MacOS, Make, Gnu, Release)
+      run: |
+        cmake -S . -B buildMake/Gnu -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=g++
+        cmake --build buildMake/Gnu -j8
+        cmake --build buildMake/Gnu -j8 --target run
+
+    - name: CMake configure, build, run on (MacOS, Make, Clang, Debug)
+      run: |
+        cmake -S . -B buildMake/Clang -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_CXX_COMPILER=clang++
+        cmake --build buildMake/Clang -j8
+        cmake --build buildMake/Clang -j8 --target run
+
+    - name: CMake configure, build, run on (MacOS, Make, Clang, Release)
+      run: |
+        cmake -S . -B buildMake/Clang -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=clang++
+        cmake --build buildMake/Clang -j8
+        cmake --build buildMake/Clang -j8 --target run
+
+
+  build-on-macos:
+    runs-on: macos-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Location of repo
+      run: |
+        pwd 
+        ls ${{ github.workspace }}
+        
+    - name: Setup Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
+    - name: Tool versions
+      run: | 
+        echo clang++ --version
+        clang++ --version
+        echo 
+        echo cmake --version
+        cmake --version
+        echo 
+        echo ninja --version
+        ninja --version
+
+    - name: CMake configure, build, run on (MacOS, Make, Clang, Debug)
+      run: |
+        cmake -S . -B buildMake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug
+        cmake --build buildMake -j8
+        cmake --build buildMake -j8 --target run
+
+    - name: CMake configure, build, run on (MacOS, Make, Clang, Release)
+      run: |
+        cmake -S . -B buildMake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release
+        cmake --build buildMake -j8
+        cmake --build buildMake -j8 --target run
+
+
+  build-on-windows:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Location of repo
+      run: |
+        pwd 
+        ls ${{ github.workspace }} -Name
+
+    - name: Setup MSVC compiler
+      # uses: microsoft/setup-msbuild@v1.0.2
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Setup Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
+    - name: Tool versions
+      run: | 
+        echo cl --version
+        cl --version
+        echo 
+        echo cmake --version
+        cmake --version
+        echo 
+        echo ninja --version
+        ninja --version
+
+    - name: CMake configure, build, run on (Windows, NMake, Msvc, Debug)
+      run: |
+        cmake -S . -B buildNMake -G "NMake Makefiles" -D CMAKE_BUILD_TYPE=Debug
+        cmake --build buildNMake
+        cmake --build buildNMake --target run
+
+    - name: CMake configure, build, run on (Windows, NMake, Msvc, Release)
+      run: |
+        cmake -S . -B buildNMake -G "NMake Makefiles" -D CMAKE_BUILD_TYPE=Release -D CMAKE_CXX_COMPILER=cl.exe
+        cmake --build buildNMake
+        cmake --build buildNMake --target run
