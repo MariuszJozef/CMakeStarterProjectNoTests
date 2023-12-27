@@ -144,15 +144,19 @@ jobs:
           - NinjaMC-Msvc
           - NinjaMC-Gnu
           - NinjaMC-Clang
-          - NMake-Msvc
-          - Make-Gnu
-          - Make-Clang
+          - VSx32-Msvc
+          - VSx64-Msvc
+          - Xcode-Clang
         build_type: [Debug, Release]
         exclude:
           - os: ubuntu-latest
             preset: NinjaMC-Msvc
           - os: ubuntu-latest
-            preset: NMake-Msvc
+            preset: VSx32-Msvc
+          - os: ubuntu-latest
+            preset: VSx64-Msvc
+          - os: ubuntu-latest
+            preset: Xcode-Clang
             
           - os: macos-latest
             preset: NinjaMC-Gnu
@@ -162,6 +166,10 @@ jobs:
             preset: NMake-Msvc
           - os: macos-latest
             preset: Make-Gnu
+          - os: macos-latest
+            preset: VSx32-Msvc
+          - os: macos-latest
+            preset: VSx64-Msvc
 
           - os: windows-latest
             preset: NinjaMC-Gnu
@@ -171,6 +179,8 @@ jobs:
             preset: Make-Gnu
           - os: windows-latest
             preset: Make-Clang
+          - os: windows-latest
+            preset: Xcode-Clang
         
     runs-on: ${{matrix.os}}
 

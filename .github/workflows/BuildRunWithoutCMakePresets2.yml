@@ -34,7 +34,8 @@ jobs:
             cpp_compiler: 
               name: cl
           - os: ubuntu-latest
-            generator: "NMake Makefiles"
+            generator: 
+              name: "NMake Makefiles"
               
           - os: macos-latest
             cpp_compiler: 
@@ -43,7 +44,8 @@ jobs:
             cpp_compiler:
               name: g++
           - os: macos-latest
-            generator: "NMake Makefiles"
+            generator: 
+              name: "NMake Makefiles"
 
           - os: windows-latest
             cpp_compiler: 
@@ -52,7 +54,8 @@ jobs:
             cpp_compiler: 
               name: clang++
           - os: windows-latest
-            generator: "Unix Makefiles"
+            generator: 
+              name: "Unix Makefiles"
         # include:
         #   - os: windows-latest
         #     cpp_compiler: cl
