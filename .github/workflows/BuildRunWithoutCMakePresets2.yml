@@ -61,6 +61,7 @@ jobs:
       run: |
         pwd 
         ls ${{ github.workspace }}
+        ls ${{ github.workspace }}/build*
         
     - name: Setup Ninja
       uses: seanmiddleditch/gha-setup-ninja@master
@@ -115,3 +116,6 @@ jobs:
         build type = ${{matrix.build_type}} ~ 
         compiler = ${{matrix.cpp_compiler.name}}  
       run: cmake --build ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -j8 --target run
+
+    - name: Build dir
+      run: ls ${{ github.workspace }}/build*
