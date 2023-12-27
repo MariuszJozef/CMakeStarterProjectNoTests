@@ -29,7 +29,7 @@ jobs:
 
     steps:
     # - run: echo Running on ${{ runner.os }}
-    - run: Platform = ${{ matrix.os }}, compiler = ${{ matrix.cpp_compiler}}, build type = ${{ matrix.build_type }}
+    - run: echo Platform = ${{ matrix.os }}, compiler = ${{ matrix.cpp_compiler}}, build type = ${{ matrix.build_type }}
 
     - name: Setup MSVC compiler
       if: ${{ matrix.os == 'windows-latest' }}
