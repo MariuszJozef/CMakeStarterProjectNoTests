@@ -14,6 +14,11 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         cpp_compiler: [g++, clang++]
         build_type: [Debug, Release]
+        generators: 
+          - generator: Ninja
+            buildDir: buildNinja
+          - generator: Ninja Multi-Config
+            buildDir: buildNinjaMC
         exclude:
           - os: macos-latest
             cpp_compiler: g++
@@ -69,10 +74,10 @@ jobs:
         ninja --version
 
     - name: CMake configure ${{ runner.os }} ${{matrix.build_type}} ${{matrix.cpp_compiler}}
-      run: cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=${{matrix.build_type}} --fresh
+      run: cmake -S . -B ${{matrix.generators.buildDir}} -G ${{matrix.generators.generator}} -D CMAKE_BUILD_TYPE=${{matrix.build_type}} --fresh
       
     - name: CMake build ${{ runner.os }}
-      run: cmake --build buildNinja -j8
+      run: cmake --build ${{matrix.generators.buildDir}} -j8
 
     - name: CMake run ${{ runner.os }}
-      run: cmake --build buildNinja -j8 --target run
+      run: cmake --build ${{matrix.generators.buildDir}} -j8 --target run
