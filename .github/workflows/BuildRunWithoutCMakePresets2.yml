@@ -12,12 +12,18 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        cpp_compiler: [g++, clang++, cl]
+        cpp_compiler: 
+          - name: g++
+            buildSubDir: Gnu
+          - name: clang++
+            buildSubDir: Clang
+          - name: cl
+            buildSubDir: Msvcs
         build_type: [Debug, Release]
-        generators: 
-          - generator: Ninja
+        generator: 
+          - name: Ninja
             buildDir: buildNinja
-          - generator: "Ninja Multi-Config"
+          - name: "Ninja Multi-Config"
             buildDir: buildNinjaMC
         exclude:
           - os: ubuntu-latest
@@ -81,11 +87,11 @@ jobs:
         echo ninja --version
         ninja --version
 
-    - name: CMake configure ~~ ${{runner.os}} ~~ ${{matrix.generators.generator}} ~~ ${{matrix.build_type}} ~~ ${{matrix.cpp_compiler}}
-      run: cmake -S . -B ${{matrix.generators.buildDir}} -G ${{matrix.generators.generator}} -D CMAKE_BUILD_TYPE=${{matrix.build_type}} --fresh
+    - name: CMake configure ~ ${{runner.os}} ~ "${{matrix.generator.name}}" ~ ${{matrix.build_type}} ~ ${{matrix.cpp_compiler}}
+      run: cmake -S . -B ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -G ${{matrix.generator.name}} -D CMAKE_BUILD_TYPE=${{matrix.build_type}} --fresh
       
-    - name: CMake build ~~ ${{runner.os}} ~~ ${{matrix.generators.generator}} ~~ ${{matrix.build_type}} ~~ ${{matrix.cpp_compiler}}
-      run: cmake --build ${{matrix.generators.buildDir}} -j8
+    - name: CMake build ~ ${{runner.os}} ~ ${{matrix.generator.name}} ~ ${{matrix.build_type}} ~ ${{matrix.cpp_compiler}}
+      run: cmake --build ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -j8
 
-    - name: CMake run ~~ ${{runner.os}} ~~ ${{matrix.generators.generator}} ~~ ${{matrix.build_type}} ~~ ${{matrix.cpp_compiler}}
-      run: cmake --build ${{matrix.generators.buildDir}} -j8 --target run
+    - name: CMake run ~ ${{runner.os}} ~ ${{matrix.generator.name}} ~ ${{matrix.build_type}} ~ ${{matrix.cpp_compiler}}
+      run: cmake --build ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -j8 --target run
