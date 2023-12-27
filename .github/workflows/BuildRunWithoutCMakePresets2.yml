@@ -48,6 +48,9 @@ jobs:
         echo clang++ --version
         clang++ --version
         echo 
+        echo cl --version
+        cl --version
+        echo 
         echo cmake --version
         cmake --version
         echo 
