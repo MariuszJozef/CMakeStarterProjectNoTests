@@ -92,26 +92,26 @@ jobs:
         echo ninja --version
         ninja --version
 
-    - name: >
-        CMake configure <br\>
-        platform = ${{runner.os}} <br\>
-        generator = ${{matrix.generator.name}} <br\>
-        build type = ${{matrix.build_type}} <br\>
+    - name: |
+        CMake configure
+        platform = ${{runner.os}}
+        generator = ${{matrix.generator.name}}
+        build type = ${{matrix.build_type}}
         compiler = ${{matrix.cpp_compiler.name}}
       run: cmake -S . -B ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -G "${{matrix.generator.name}}" -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D CMAKE_CXX_COMPILER=${{matrix.cpp_compiler.name}} --fresh
       
-    - name: >+
-        CMake build <br\>
-        platform = ${{runner.os}} <br\>
-        generator = ${{matrix.generator.name}} <br\>
-        build type = ${{matrix.build_type}} <br\>
+    - name: |
+        CMake build
+        platform = ${{runner.os}}
+        generator = ${{matrix.generator.name}}
+        build type = ${{matrix.build_type}}
         compiler = ${{matrix.cpp_compiler.name}}
       run: cmake --build ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -j8
 
-    - name: >+
-        CMake run <br\>
-        platform = ${{runner.os}} <br\>
-        generator = ${{matrix.generator.name}} <br\>
-        build type = ${{matrix.build_type}} <br\>
+    - name: |
+        CMake run
+        platform = ${{runner.os}}
+        generator = ${{matrix.generator.name}}
+        build type = ${{matrix.build_type}}
         compiler = ${{matrix.cpp_compiler.name}}  
       run: cmake --build ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -j8 --target run
