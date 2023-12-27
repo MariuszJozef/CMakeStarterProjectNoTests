@@ -132,9 +132,7 @@ jobs:
         preset = ${{matrix.preset}}
       run: cmake --build --preset ${{matrix.preset}} --target run
 
-    - name: Build dir
-      run: ls ${{github.workspace}}/build*
-  
+
   multiConfig:
     strategy:
       fail-fast: false
@@ -246,6 +244,3 @@ jobs:
         preset = ${{matrix.preset}} ~
         build_type = ${{matrix.build_type}}
       run: cmake --build --preset ${{matrix.preset}} --config ${{matrix.build_type}} --target run
-
-    - name: Build dir
-      run: ls ${{github.workspace}}/build*

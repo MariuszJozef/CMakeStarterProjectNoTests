@@ -70,6 +70,7 @@ jobs:
         ls ${{github.workspace}}
         
     - name: Setup Ninja
+      # if: ${{matrix.generator.name == Ninja}}
       uses: seanmiddleditch/gha-setup-ninja@master
 
     - name: Setup MSVC compiler
@@ -194,6 +195,7 @@ jobs:
         ls ${{github.workspace}}
         
     - name: Setup Ninja
+      # if: ${{matrix.generator.name == "Ninja Multi-Config"}}
       uses: seanmiddleditch/gha-setup-ninja@master
 
     - name: Setup MSVC compiler
@@ -291,9 +293,6 @@ jobs:
       run: |
         pwd 
         ls ${{github.workspace}}
-        
-    - name: Setup Ninja
-      uses: seanmiddleditch/gha-setup-ninja@master
 
     - name: Setup MSVC compiler
       # uses: microsoft/setup-msbuild@v1.0.2
