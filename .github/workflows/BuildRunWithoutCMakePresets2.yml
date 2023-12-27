@@ -18,13 +18,13 @@ jobs:
           - name: clang++
             buildSubDir: Clang
           - name: cl
-            buildSubDir: Msvcs
+            buildSubDir: Msvc
         build_type: [Debug, Release]
         generator: 
           - name: Ninja
-            buildDir: buildNinja
+            buildDir: buildNinja/${{matrix.cpp_compiler.buildSubDir}}
           - name: "Ninja Multi-Config"
-            buildDir: buildNinjaMC
+            buildDir: buildNinjaMC/${{matrix.cpp_compiler.buildSubDir}}
         exclude:
           - os: ubuntu-latest
             cpp_compiler: cl
@@ -87,11 +87,11 @@ jobs:
         echo ninja --version
         ninja --version
 
-    - name: CMake configure ~ ${{runner.os}} ~ "${{matrix.generator.name}}" ~ ${{matrix.build_type}} ~ ${{matrix.cpp_compiler}}
-      run: cmake -S . -B ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -G ${{matrix.generator.name}} -D CMAKE_BUILD_TYPE=${{matrix.build_type}} --fresh
+    - name: CMake configure ~ ${{runner.os}} ~ ${{matrix.generator.name}} ~ ${{matrix.build_type}} ~ ${{matrix.cpp_compiler}}
+      run: cmake -S . -B ${{matrix.generator.buildDir}} -G "${{matrix.generator.name}}"" -D CMAKE_BUILD_TYPE=${{matrix.build_type}} --fresh
       
     - name: CMake build ~ ${{runner.os}} ~ ${{matrix.generator.name}} ~ ${{matrix.build_type}} ~ ${{matrix.cpp_compiler}}
-      run: cmake --build ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -j8
+      run: cmake --build ${{matrix.generator.buildDir}} -j8
 
     - name: CMake run ~ ${{runner.os}} ~ ${{matrix.generator.name}} ~ ${{matrix.build_type}} ~ ${{matrix.cpp_compiler}}
-      run: cmake --build ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -j8 --target run
+      run: cmake --build ${{matrix.generator.buildDir}} -j8 --target run
