@@ -12,51 +12,41 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        preset: 
+        preset: [Ninja-Msvc-Debug, Ninja-Gnu-Debug, Ninja-Clang-Debug]
         # single config generators
-          - Ninja-Msvc-Debug
-          - Ninja-Msvc-Release
-          - Ninja-Gnu-Debug
-          - Ninja-Gnu-Release
-          - Ninja-Clang-Debug
-          - Ninja-Clang-Release
+          # - Ninja-Msvc-Debug
+          # - Ninja-Msvc-Release
+          # - Ninja-Gnu-Debug
+          # - Ninja-Gnu-Release
+          # - Ninja-Clang-Debug
+          # - Ninja-Clang-Release
         # multi config generators
           # - NinjaMC-Msvc
           # - NinjaMC-Gnu
           # - NinjaMC-Clang
         exclude:
           - os: ubuntu-latest
-            preset: 
-              - Ninja-Msvc-Debug
-          - os: ubuntu-latest
-            preset: 
-              - Ninja-Msvc-Release
+            preset: Ninja-Msvc-Debug
+          # - os: ubuntu-latest
+          #   preset: Ninja-Msvc-Release
             # - NinjaMC-Msvc
           - os: macos-latest
-            preset: 
-              - Ninja-Gnu-Debug
+            preset: Ninja-Gnu-Debug
+          # - os: macos-latest
+          #   preset: Ninja-Gnu-Release
           - os: macos-latest
-            preset: 
-              - Ninja-Gnu-Release
-          - os: macos-latest
-            preset: 
-              - Ninja-Msvc-Debug
-          - os: macos-latest
-            preset: 
-              - Ninja-Msvc-Release
+            preset: Ninja-Msvc-Debug
+          # - os: macos-latest
+          #   preset: Ninja-Msvc-Release
             # - NinjaMC-Msvc
           - os: windows-latest
-            preset: 
-              - Ninja-Gnu-Debug
+            preset: Ninja-Gnu-Debug
+          # - os: windows-latest
+          #   preset: Ninja-Gnu-Release
           - os: windows-latest
-            preset: 
-              - Ninja-Gnu-Release
-          - os: windows-latest
-            preset: 
-              - Ninja-Clang-Debug
-          - os: windows-latest
-            preset: 
-              - Ninja-Clang-Release
+            preset: Ninja-Clang-Debug
+          # - os: windows-latest
+          #   preset: Ninja-Clang-Release
             # - NinjaMC-Gnu
             # - NinjaMC-Clang
         
