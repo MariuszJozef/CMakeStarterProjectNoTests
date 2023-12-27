@@ -6,13 +6,15 @@ on:
   pull_request:
     branches: [master]
 
+env:
+  isSingleConfigGenerator: "yes"
+
 jobs:
-  build:
+  build1:
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        # preset: [Ninja-Msvc-Debug, Ninja-Gnu-Debug, Ninja-Clang-Debug]
         preset:
         # single config generators
           - Ninja-Msvc-Debug
@@ -21,16 +23,11 @@ jobs:
           - Ninja-Gnu-Release
           - Ninja-Clang-Debug
           - Ninja-Clang-Release
-        # multi config generators
-          # - NinjaMC-Msvc
-          # - NinjaMC-Gnu
-          # - NinjaMC-Clang
         exclude:
           - os: ubuntu-latest
             preset: Ninja-Msvc-Debug
           - os: ubuntu-latest
             preset: Ninja-Msvc-Release
-            # - NinjaMC-Msvc
           - os: macos-latest
             preset: Ninja-Gnu-Debug
           - os: macos-latest
@@ -39,7 +36,6 @@ jobs:
             preset: Ninja-Msvc-Debug
           - os: macos-latest
             preset: Ninja-Msvc-Release
-            # - NinjaMC-Msvc
           - os: windows-latest
             preset: Ninja-Gnu-Debug
           - os: windows-latest
@@ -48,8 +44,6 @@ jobs:
             preset: Ninja-Clang-Debug
           - os: windows-latest
             preset: Ninja-Clang-Release
-            # - NinjaMC-Gnu
-            # - NinjaMC-Clang
         
     runs-on: ${{matrix.os}}
 
@@ -111,6 +105,95 @@ jobs:
         platform = ${{runner.os}} ~ 
         preset = ${{matrix.preset}}
       run: cmake --build --preset ${{matrix.preset}} --target run
+
+    - name: Build dir
+      run: ls ${{github.workspace}}/build*
+  
+  build2:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        preset:
+        # multi config generators
+          - NinjaMC-Msvc
+          - NinjaMC-Gnu
+          - NinjaMC-Clang
+        build_type: [Debug, Release]
+        exclude:
+          - os: ubuntu-latest
+            preset: NinjaMC-Msvc
+          - os: macos-latest
+            preset: NinjaMC-Gnu
+          - os: macos-latest
+            preset: NinjaMC-Msvc
+          - os: windows-latest
+            preset: NinjaMC-Gnu
+          - os: windows-latest
+            preset: NinjaMC-Clang
+        
+    runs-on: ${{matrix.os}}
+
+    steps:
+    - run: echo Platform = ${{matrix.os}}, preset = ${{matrix.preset}}
+
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Location of repo
+      run: |
+        pwd 
+        ls ${{github.workspace}}
+        
+    - name: Setup Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
+    - name: Setup MSVC compiler
+      if: ${{matrix.os == 'windows-latest'}}
+      # uses: microsoft/setup-msbuild@v1.0.2
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: MSVC compiler version
+      if: ${{matrix.os == 'windows-latest'}}
+      shell: bash
+      run: |
+        echo cl
+        cl
+
+    - name: Tool versions
+      shell: bash
+      run: | 
+        echo g++ --version
+        g++ --version
+        echo 
+        echo clang++ --version
+        clang++ --version
+        echo 
+        echo cmake --version
+        cmake --version
+        echo 
+        echo ninja --version
+        ninja --version
+
+    - name: >
+        CMake configure ~ 
+        platform = ${{runner.os}} ~ 
+        preset = ${{matrix.preset}}
+      run: cmake --preset ${{matrix.preset}}
+      
+    - name: >
+        CMake build ~ 
+        platform = ${{runner.os}} ~ 
+        preset = ${{matrix.preset}} ~
+        build_type = ${{matrix.build_type}}
+      run: cmake --build --preset ${{matrix.preset}} --config ${{matrix.build_type}}
+
+    - name: >
+        CMake run ~ 
+        platform = ${{runner.os}} ~ 
+        preset = ${{matrix.preset}} ~
+        build_type = ${{matrix.build_type}}
+      run: cmake --build --preset ${{matrix.preset}} --config ${{matrix.build_type}} --target run
 
     - name: Build dir
       run: ls ${{github.workspace}}/build*

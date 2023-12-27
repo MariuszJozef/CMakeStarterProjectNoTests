@@ -1,0 +1,18 @@
+name: 'test'
+description: 'test'
+
+outputs:
+  out:
+    description: output
+    value: '${{ steps.plan.outputs.out }}'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: test
+      id: plan
+      shell: bash
+      run: |
+        out="hello \n world"
+        echo "out=$out" >> $GITHUB_OUTPUT
