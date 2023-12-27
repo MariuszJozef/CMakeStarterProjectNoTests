@@ -28,24 +28,19 @@ jobs:
         exclude:
           - os: ubuntu-latest
             cpp_compiler: 
-            - name: cl
-              buildSubDir: Msvc
+              name: cl
           - os: macos-latest
             cpp_compiler: 
-            - name: cl
-              buildSubDir: Msvc
+              name: cl
           - os: macos-latest
             cpp_compiler:
-            - name: g++
-              buildSubDir: Gnu
+              name: g++
           - os: windows-latest
             cpp_compiler: 
-            - name: g++
-              buildSubDir: Gnu
+              name: g++
           - os: windows-latest
             cpp_compiler: 
-            - name: clang++
-              buildSubDir: Clang
+              name: clang++
         # include:
         #   - os: windows-latest
         #     cpp_compiler: cl
@@ -97,7 +92,7 @@ jobs:
         echo ninja --version
         ninja --version
 
-    - name: >
+    - name: >+
         CMake configure \n
         platform = ${{runner.os}} \n
         generator = ${{matrix.generator.name}} \n
@@ -105,7 +100,7 @@ jobs:
         compiler = ${{matrix.cpp_compiler.name}}
       run: cmake -S . -B ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -G "${{matrix.generator.name}}" -D CMAKE_BUILD_TYPE=${{matrix.build_type}} -D CMAKE_CXX_COMPILER=${{matrix.cpp_compiler.name}} --fresh
       
-    - name: >
+    - name: >+
         CMake build \n
         platform = ${{runner.os}} \n
         generator = ${{matrix.generator.name}} \n
@@ -113,7 +108,8 @@ jobs:
         compiler = ${{matrix.cpp_compiler.name}}
       run: cmake --build ${{matrix.generator.buildDir}}/${{matrix.cpp_compiler.buildSubDir}} -j8
 
-    - name: CMake run \n
+    - name: >+
+        CMake run \n
         platform = ${{runner.os}} \n
         generator = ${{matrix.generator.name}} \n
         build type = ${{matrix.build_type}} \n
