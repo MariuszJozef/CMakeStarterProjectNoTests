@@ -72,7 +72,7 @@ jobs:
       run: cmake -S . -B buildNinja -G Ninja -D CMAKE_BUILD_TYPE=${{matrix.build_type}}
       
     - name: CMake build ${{ runner.os }}
-      run: cmake --buildNinja -j8
+      run: cmake --build buildNinja -j8
 
     - name: CMake run ${{ runner.os }}
-      run: cmake --buildNinja -j8 --target run
+      run: cmake --build buildNinja -j8 --target run
