@@ -30,7 +30,4 @@ jobs:
     steps:
       - run: echo "🐧 This job is now running on a ${{ runner.os }}"
       - run: echo "The repository is ${{ github.repository }}."
-
-      - name: Info
-        shell: bash
-        run: echo "os = ${{ matrix.os }}, cpp_compiler = ${{ matrix.cpp_compiler}}, build_type = ${{ matrix.build_type }}"
+      - run: echo os = ${{ matrix.os }}, cpp_compiler = ${{ matrix.cpp_compiler}}, build_type = ${{ matrix.build_type }}

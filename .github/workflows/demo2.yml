@@ -24,4 +24,4 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - run: os = ${{ matrix.os }}, version = ${{ matrix.version}}, environment = ${{ matrix.environment }}
+      - run: echo os = ${{ matrix.os }}, version = ${{ matrix.version}}, environment = ${{ matrix.environment }}
