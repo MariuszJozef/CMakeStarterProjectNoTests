@@ -48,14 +48,17 @@ jobs:
         echo clang++ --version
         clang++ --version
         echo 
-        echo cl --version
-        cl --version
-        echo 
         echo cmake --version
         cmake --version
         echo 
         echo ninja --version
         ninja --version
+
+    - name: Tool versions (Windows)
+      shell: bash
+      run: |
+        echo cl --version
+        cl --version
 
     - name: Checkout repo
       uses: actions/checkout@v4
