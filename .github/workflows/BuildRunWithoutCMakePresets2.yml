@@ -1,0 +1,36 @@
+name: Build and run without CMakePresets.json 2
+
+on:
+  push: 
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        cpp_compiler: [g++, clang++]
+        build_type: [Debug, Release]
+        exlude:
+          - os: macos-latest
+            cpp_compiler: g++
+        include:
+          - os: windows-latest
+            cpp_compiler: cl
+            build_type: Debug
+          - os: windows-latest
+            cpp_compiler: cl
+            build_type: Release
+        
+    steps:
+      - run: echo "🐧 This job is now running on a ${{ runner.os }}"
+      - run: echo "The repository is ${{ github.repository }}."
+
+      - name: Info
+        shell: bash
+        run: echo "os = ${{ matrix.os }}, cpp_compiler = ${{ matrix.cpp_compiler}}, build_type = ${{ matrix.build_type }}"
