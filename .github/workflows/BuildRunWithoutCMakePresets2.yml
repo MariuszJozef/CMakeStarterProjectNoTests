@@ -14,20 +14,20 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         cpp_compiler: [g++, clang++]
         build_type: [Debug, Release]
-        exlude:
+        exclude:
           - os: macos-latest
             cpp_compiler: g++
-        # include:
-        #   - os: windows-latest
-        #     cpp_compiler: cl
-        #     build_type: Debug
-        #   - os: windows-latest
-        #     cpp_compiler: cl
-        #     build_type: Release
+        include:
+          - os: windows-latest
+            cpp_compiler: cl
+            build_type: Debug
+          - os: windows-latest
+            cpp_compiler: cl
+            build_type: Release
         
     runs-on: ${{ matrix.os }}
 
     steps:
       - run: echo "🐧 This job is now running on a ${{ runner.os }}"
-      - run: echo "The repository is ${{ github.repository }}."
+      - run: echo The repository is ${{ github.repository }}.
       - run: echo os = ${{ matrix.os }}, cpp_compiler = ${{ matrix.cpp_compiler}}, build_type = ${{ matrix.build_type }}
