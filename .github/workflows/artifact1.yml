@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
     steps: 
     - name: Checkout repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Setup MSVC compiler
       # uses: microsoft/setup-msbuild@v1.0.2
@@ -35,3 +35,8 @@ jobs:
       with:
         name: binary file
         path: buildNinja/Msvc/buildOut/StarterProject/bin/Debug/*.exe
+
+    - name: Download a single artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: binary file
